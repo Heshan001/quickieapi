@@ -1,5 +1,7 @@
 <?php
 
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,7 +23,7 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                "error"=>"Password not matched"
+                "error"=>"Invalid email or password"
             ]);
         }
 
@@ -30,9 +32,10 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token,
             'user_id' => $user->id,
-            'first_name' => $user->role === 'student' ? $user->student->first_name : ($user->role=='institute'? $user->institute->first_name : ''  ),
-            'last_name' => $user->role === 'student' ? $user->student->last_name : ($user->role=='institute'? $user->institute->last_name : ''  ),
+            'fName' => $user->role === 'student' ? $user->student->fName : ($user->role == 'institute' ? $user->institute->instituteName : ''),
+            'lName' => $user->role === 'student' ? $user->student->lName : ($user->role == 'institute' ? '' : ''),
         ]);
+
     }
 
 
@@ -68,43 +71,49 @@ class AuthController extends Controller
         return $request->user()->currentAccessToken()->delete();
     }
 
+    // public function logout()
+    // {
+    //     return auth('sanctum')->user()->currentAccessToken()->delete();
+    // }
+
+
     public function signup(Request $request)
         {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:6',
-                'first_name' => 'required',
+                'fName' => 'required',
                 'role' => 'required|in:student,institute,admin',
             ]);
 
             if ($validator->fails()) {
                 return response()->json([
                         'code'=>400,
-                        'errors' => $validator->errors(),
                         'status'=>false,
-                        'message'=>"Validation Error",
+                        'message'=>'Validation Error',
+                        'errors' => $validator->errors(),
                     ]
                     , 400);
             }
 
             $user = new User([
                 'email' => $request->email,
-                'name' => $request->first_name.' '.$request->last_name,
+                'name' => $request->role === 'student' ? $request->fName . ' ' . $request->lName : $request->instituteName,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
             ]);
+
             $user->save();
 
             // Create student or institute based on the role
             if ($request->role === 'student') {
                 $user->student()->create([
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'fName' => $request->fName,
+                    'lName' => $request->lName,
                 ]);
             } elseif ($request->role === 'institute') {
                 $user->institute()->create([
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'instituteName' => $request->instituteName,
                 ]);
             }
 
@@ -117,11 +126,12 @@ class AuthController extends Controller
                         'token' => $token,
                         'user_id' => $user->id,
                         'email' => $user->email,
-                        'first_name' => isset($request->first_name)?$request->first_name:'',
-                        'last_name' => $request->last_name,
+                        'fName' => isset($request->fName)?$request->fName:'',
+                        'lName' => isset($request->lName)?$request->lName:'',
+                        'instituteName' => isset($request->instituteName)?$request->instituteName:'',
                         'role' => $request->role,
                     ],
-                    "status"=>'success',
+                    "status"=>'true',
                     "message"=>"success"
                 ]
         );
