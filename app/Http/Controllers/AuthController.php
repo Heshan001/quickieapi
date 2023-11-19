@@ -56,7 +56,7 @@ class AuthController extends Controller
                 'user'=>$user
             ]);
         } else {
-            // Use an empty object instead of stdClass
+            // Use an empty object 
             $user = (object)[
                 'valid' => false,
             ];
