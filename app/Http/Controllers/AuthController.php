@@ -1,7 +1,5 @@
 <?php
 
-<?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -56,7 +54,7 @@ class AuthController extends Controller
                 'user'=>$user
             ]);
         } else {
-            // Use an empty object 
+            // Use an empty object
             $user = (object)[
                 'valid' => false,
             ];
