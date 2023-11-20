@@ -27,12 +27,21 @@ class AuthController extends Controller
 
         $token = $user->createToken('token')->plainTextToken;
 
-        return response()->json([
+        $data = [
             'token' => $token,
             'user_id' => $user->id,
-            'fName' => $user->role === 'student' ? $user->student->fName : ($user->role == 'institute' ? $user->institute->instituteName : ''),
-            'lName' => $user->role === 'student' ? $user->student->lName : ($user->role == 'institute' ? '' : ''),
-        ]);
+        ];
+
+        if ($user->isInstitute()) {
+            // Additional data for the institute role
+            $data['instituteName'] = $user->institute->instituteName; // Assuming 'instituteName' is the column in the 'institutes' table
+        } elseif ($user->isStudent()) {
+            // Additional data for the student role
+            $data['fName'] = $user->student->fName; // Assuming 'fName' is the column in the 'students' table
+            $data['lName'] = $user->student->lName; // Assuming 'lName' is the column in the 'students' table
+        }
+
+        return response()->json($data);
 
     }
 
