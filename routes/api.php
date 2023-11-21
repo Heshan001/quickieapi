@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 
 Route::group([], base_path('routes/route_api/login_signup_routes.php'));
 
+
 Route::post('/check', [AuthController::class, 'checkUserAuthOrNot']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
