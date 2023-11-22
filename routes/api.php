@@ -4,8 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
-Route::group([], base_path('routes/route_api/login_signup_routes.php'));
 
+
+Route::group([], base_path('routes/route_api/login_signup_routes.php'));
 
 Route::post('/check', [AuthController::class, 'checkUserAuthOrNot']);
 
