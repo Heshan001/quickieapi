@@ -13,4 +13,8 @@ class Event extends Model
     ];
 
 
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class, 'institute_id');
+    }
 }
