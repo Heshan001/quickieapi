@@ -19,4 +19,9 @@ class Institute extends Model
         return $this->morphOne(User::class, 'user_id');
     }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
 }
