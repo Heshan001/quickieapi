@@ -15,14 +15,13 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('courseName');
-            $table->string('courseOverview');
-            $table->string('courseContent');
-            $table->string('coursePayment');
-            $table->string('minimumResult');
-            $table->string('subjectStream');
-            $table->string('zCore');
-            $table->string('image');
+            $table->string('courseName',255);
+            $table->string('courseOverview',255);
+            $table->string('courseContent',255);
+            $table->string('minimumResult',255);
+            $table->string('subjectStream',255);
+            $table->decimal('zCore',10,4);
+            $table->string('image',255);
             $table->unsignedBigInteger('institute_id');
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->timestamps();
