@@ -39,12 +39,27 @@ class AuthController extends Controller
             $data['lName'] = $user->student->lName;
         }
 
-        return response()->json($data);
+        return response()->json([
+            "code" => 200,
+            "data" => (object)$data,
+            "status" => 'true',
+            "message" => "success"
+        ]);
     }
 
     public function user(Request $request)
     {
         return $request->user();
+    }
+
+    public function AuthUser()
+    {
+        $user = null;
+
+        if (auth('sanctum')->check()) {
+            $user = User::find(auth('sanctum')->user()->id);
+        }
+        return $user;
     }
 
     public function checkUserAuthOrNot()
@@ -79,7 +94,6 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-          
             'role' => 'required|in:student,institute,admin',
         ]);
 
