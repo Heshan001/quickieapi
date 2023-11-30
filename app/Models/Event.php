@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'courseName', 'courseOverview', 'courseContent', 'minimumResult', 'subjectStream', 'zCore', 'image', 'institute_id',
+    ];
+
+
 }
