@@ -20,8 +20,14 @@ class CourseCrudController extends Controller
         $authUser = $this->getAuthUser();
         if($authUser->role == 'institute'){
             $data = [
-                "name"=>$request->name,
-                "overview"=>$request->overview,
+                "courseName"=>$request->courseName,
+                "courseOverview"=>$request->courseOverview,
+                "courseContent"=>$request->courseContent,
+                // "coursePayment"=>0,
+                "minimumResult"=>$request->minimumResult,
+                "subjectStream"=>$request->subjectStream,
+                "zCore"=>$request->zCore,
+                "image"=>$request->image,
                 "institute_id"=> $authUser->institute->id
             ];
             $course = new Course($data);
@@ -82,7 +88,7 @@ class CourseCrudController extends Controller
                 "total" => $data->total(),
                 "per_page" => $data->perPage(),
                 "current_page" => $data->currentPage(),
-            ] 
+            ]
         ];
 
         return response()->json([
