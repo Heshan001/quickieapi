@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'courseName ','courseOverview','courseContent','minimumResult','subjectStream','zCore','image',
+        'courseName ','courseOverview','courseContent','minimumResult','subjectStream','zCore','image','institute_id',
     ];
 
     public function institute()
