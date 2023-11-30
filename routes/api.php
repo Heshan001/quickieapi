@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 
 
 Route::group([], base_path('routes/route_api/login_signup_routes.php'));
+Route::group([], base_path('routes/route_api/course_routes.php'));
+
 
 Route::post('/check', [AuthController::class, 'checkUserAuthOrNot']);
 
