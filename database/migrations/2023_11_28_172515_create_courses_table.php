@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->string('courseContent');
             $table->string('coursePayment');
             $table->string('minimumResult');
+            $table->string('subjectStream');
             $table->string('zCore');
             $table->string('image');
             $table->unsignedBigInteger('institute_id');
