@@ -23,7 +23,6 @@ class CourseCrudController extends Controller
                 "courseName"=>$request->courseName,
                 "courseOverview"=>$request->courseOverview,
                 "courseContent"=>$request->courseContent,
-                // "coursePayment"=>0,
                 "minimumResult"=>$request->minimumResult,
                 "subjectStream"=>$request->subjectStream,
                 "zCore"=>$request->zCore,
