@@ -21,7 +21,7 @@ class CreateCoursesTable extends Migration
             $table->string('minimumResult',255);
             $table->string('subjectStream',255);
             $table->decimal('zCore',10,4);
-            $table->string('image',255);
+            $table->text('image');
             $table->unsignedBigInteger('institute_id');
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->timestamps();
