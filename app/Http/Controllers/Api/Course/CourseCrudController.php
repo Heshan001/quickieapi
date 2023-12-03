@@ -38,7 +38,6 @@ class CourseCrudController extends Controller
                // $image->move($path);
                // Get the file from the request
                 $file = $request->file('file');
-
                 // Store the file in the public/uploads directory
                     // $fileName = $file->getClientOriginalName();
                      $uploaded = Storage::disk('public')->put('uploads', $request->file('image'));
