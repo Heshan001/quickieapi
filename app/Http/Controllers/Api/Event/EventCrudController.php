@@ -27,13 +27,15 @@ class EventCrudController extends Controller
                 "institute_id"=> $authUser->institute->id
             ];
 
+
+
                 // Save the image file
                 $image = $request->file('image');
-                $imageName = $image->getClientOriginalName();
+               // $imageName = $image->getClientOriginalName();
 
                 $file = $request->file('file');
 
-                $uploaded = Storage::disk('public')->put('uploads', $request->file('image'));
+                $uploaded = Storage::disk('public')->put('events', $request->file('image'));
                 $path = 'storage/' . $uploaded;
 
                 // Update the 'image' property in the data array
