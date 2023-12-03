@@ -7,6 +7,7 @@ use App\Helpers\AuthUserHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,24 @@ class CourseCrudController extends Controller
                 "image"=>$request->image,
                 "institute_id"=> $authUser->institute->id
             ];
+
+                // Save the image file
+                $image = $request->file('image');
+                $imageName = $image->getClientOriginalName();
+               // $path = public_path('uploads/' . $imageName );
+               // $image->move($path);
+               // Get the file from the request
+                $file = $request->file('file');
+
+                // Store the file in the public/uploads directory
+                    // $fileName = $file->getClientOriginalName();
+                     $uploaded = Storage::disk('public')->put('uploads', $request->file('image'));
+                     $path = 'storage/' . $uploaded;
+
+                // Update the 'image' property in the data array
+                $data['image'] = $path;
+
+
             $course = new Course($data);
             $course =$course->save();
 
