@@ -15,10 +15,10 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('eventName');
-            $table->unsignedBigInteger('institute_id');
-            $table->string('eventDescription');
-            $table->string('addImage');
+            $table->string('eventName', 225);
+            $table->unsignedBigInteger('institute_id',);
+            $table->string('eventDescription',225);
+            $table->text('Image',);
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->timestamps();
         });
