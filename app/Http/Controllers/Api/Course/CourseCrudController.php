@@ -102,9 +102,9 @@ class CourseCrudController extends Controller
         $out = [
             "courses" => $data->items(),
             "pagination" => [
-                "total" => $data->total(),
-                "per_page" => $data->perPage(),
-                "current_page" => $data->currentPage(),
+            "total" => $data->total(),
+            "per_page" => $data->perPage(),
+            "current_page" => $data->currentPage(),
             ]
         ];
 
