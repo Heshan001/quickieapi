@@ -14,6 +14,8 @@ class Institute extends Model
         'user_id',
     ];
 
+    //relation part
+
     public function user()
     {
         return $this->morphOne(User::class, 'user_id');
@@ -24,4 +26,8 @@ class Institute extends Model
         return $this->hasMany(Course::class);
     }
 
+    public function course()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
