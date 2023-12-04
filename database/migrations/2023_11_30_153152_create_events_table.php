@@ -18,7 +18,7 @@ class CreateEventsTable extends Migration
             $table->string('eventName', 225);
             $table->unsignedBigInteger('institute_id',);
             $table->string('eventDescription',225);
-            $table->text('Image');
+            $table->text('Image')->default("abcd.jpg");
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->timestamps();
         });
