@@ -22,7 +22,7 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 "error" => "Invalid email or password"
-            ], 401);
+            ], 400);
         }
 
         $token = $user->createToken('token')->plainTextToken;
@@ -41,7 +41,8 @@ class AuthController extends Controller
 
         return response()->json([
             "code" => 200,
-            "data" => (object)$data,
+           // "data" => (object)$data,
+            "token" => $token,
             "status" => 'true',
             "message" => "success"
         ]);
@@ -130,15 +131,15 @@ class AuthController extends Controller
 
         return response()->json([
             "code" => 200,
-            "data" => (object)[
-                'token' => $token,
-                'user_id' => $user->id,
-                'email' => $user->email,
-                'fName' => $request->fName ?? '',
-                'lName' => $request->lName ?? '',
-                'instituteName' => $request->instituteName ?? '',
-                'role' => $request->role,
-            ],
+            // "data" => (object)[
+            //     'token' => $token,
+            //     'user_id' => $user->id,
+            //     'email' => $user->email,
+            //     'fName' => $request->fName ?? '',
+            //     'lName' => $request->lName ?? '',
+            //     'instituteName' => $request->instituteName ?? '',
+            //     'role' => $request->role,
+            // ],
             "status" => 'true',
             "message" => "success"
         ]);
