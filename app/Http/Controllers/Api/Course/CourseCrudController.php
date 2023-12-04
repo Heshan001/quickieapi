@@ -59,11 +59,11 @@ class CourseCrudController extends Controller
         }
 
         return response()->json([
-            'code' => 400,
+            'code' => 401,
             'status' => false,
             'message' => 'Error',
             'error' => "Error",
-        ], 400);
+        ], 401);
 
     }
 
