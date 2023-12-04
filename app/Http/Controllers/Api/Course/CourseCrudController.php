@@ -33,14 +33,14 @@ class CourseCrudController extends Controller
 
                 // Save the image file
                 $image = $request->file('image');
-                $imageName = $image->getClientOriginalName();
+             //   $imageName = $image->getClientOriginalName();
                // $path = public_path('uploads/' . $imageName );
                // $image->move($path);
                // Get the file from the request
                 $file = $request->file('file');
                 // Store the file in the public/uploads directory
                     // $fileName = $file->getClientOriginalName();
-                     $uploaded = Storage::disk('public')->put('uploads', $request->file('image'));
+                     $uploaded = Storage::disk('public')->put('courses', $request->file('image'));
                      $path = 'storage/' . $uploaded;
 
                 // Update the 'image' property in the data array
@@ -52,7 +52,7 @@ class CourseCrudController extends Controller
 
             return response()->json([
                 "code" => 200,
-                "data" => [],
+                "data" => $data,
                 "status" => 'true',
                 "message" => "success"
             ]);
