@@ -29,16 +29,20 @@ class EventCrudController extends Controller
 
 
 
-                // Save the image file
+               // Save the image file
                 $image = $request->file('image');
-               // $imageName = $image->getClientOriginalName();
+            //    // $imageName = $image->getClientOriginalName();
 
-                $file = $request->file('file');
+            //  $file = $request->file('file');
 
                 $uploaded = Storage::disk('public')->put('events', $request->file('image'));
+
+
+
+
                 $path = 'storage/' . $uploaded;
 
-                // Update the 'image' property in the data array
+            //     // Update the 'image' property in the data array
                 $data['image'] = $path;
 
 
@@ -47,7 +51,7 @@ class EventCrudController extends Controller
 
             return response()->json([
                 "code" => 200,
-                "data" => [],
+                "data" => $data,
                 "status" => 'true',
                 "message" => "success"
             ]);
@@ -95,11 +99,11 @@ class EventCrudController extends Controller
         $data = Event::where('institute_id', $authUser->institute->id)->paginate($request['limit']);
 
         $out = [
-            "events" => $data->items(),
+            "events" =>$data->items(),
             "pagination" => [
-                "total" => $data->total(),
-                "per_page" => $data->perPage(),
-                "current_page" => $data->currentPage(),
+            "total" => $data->total(),
+            "per_page" => $data->perPage(),
+            "current_page" => $data->currentPage(),
             ]
         ];
 
