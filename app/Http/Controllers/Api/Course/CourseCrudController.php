@@ -116,6 +116,33 @@ class CourseCrudController extends Controller
         ]);
     }
 
+    public function AllInstituteCourseList(Request $request)
+{
+
+        $request['limit'] = $request->query('limit');
+        $request['page'] = $request->query('page');
+
+
+    $data = Course::paginate( $request['limit']);
+
+    $out = [
+        "courses" => $data->items(),
+        // "pagination" => [
+        //     "total" => $data->total(),
+        //     "per_page" => $data->perPage(),
+        //     "current_page" => $data->currentPage(),
+        // ]
+    ];
+
+    return response()->json([
+        "code" => 200,
+        "data" => $out,
+        "status" => 'true',
+        "message" => "success"
+    ]);
+}
+
+
 
 
 
