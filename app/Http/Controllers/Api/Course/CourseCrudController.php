@@ -91,8 +91,9 @@ class CourseCrudController extends Controller
 
     }
 
-    public function instituteCourseList(Request $request){
-        //$request['query'] = $request->query('query');
+    public function instituteCourseList(Request $request)
+    {
+
         $request['limit'] = $request->query('limit');
         $request['page'] = $request->query('page');
         $authUser = $this->getAuthUser();
@@ -102,11 +103,24 @@ class CourseCrudController extends Controller
         $out = [
             "courses" => $data->items(),
             "pagination" => [
-            "total" => $data->total(),
-            "per_page" => $data->perPage(),
-            "current_page" => $data->currentPage(),
+                "total" => $data->total(),
+                "per_page" => $data->perPage(),
+                "current_page" => $data->currentPage(),
             ]
         ];
+
+        $filteredCourses = [];
+        foreach ($out['courses'] as $course) {
+            $filteredCourse = [
+                'courseName' => $course->courseName,
+                'courseOverview' => $course->courseOverview,
+                'courseContent' => $course->courseContent,
+                'image' => $course->image,
+            ];
+            $filteredCourses[] = $filteredCourse;
+        }
+
+        $out['courses'] = $filteredCourses;
 
         return response()->json([
             "code" => 200,
@@ -116,22 +130,18 @@ class CourseCrudController extends Controller
         ]);
     }
 
+
     public function AllInstituteCourseList(Request $request)
 {
 
-        $request['limit'] = $request->query('limit');
-        $request['page'] = $request->query('page');
+    $request['limit'] = $request->query('limit');
+    $request['page'] = $request->query('page');
 
-
-    $data = Course::paginate( $request['limit']);
+    $data = Course::select('courseName', 'courseOverview', 'courseContent', 'image')
+        ->paginate($request['limit']);
 
     $out = [
         "courses" => $data->items(),
-        // "pagination" => [
-        //     "total" => $data->total(),
-        //     "per_page" => $data->perPage(),
-        //     "current_page" => $data->currentPage(),
-        // ]
     ];
 
     return response()->json([
@@ -141,6 +151,7 @@ class CourseCrudController extends Controller
         "message" => "success"
     ]);
 }
+
 
 
 
