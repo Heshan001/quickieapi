@@ -130,6 +130,33 @@ class CourseCrudController extends Controller
         ]);
     }
 
+    // public function instituteCourseList(Request $request){
+    //     //$request['query'] = $request->query('query');
+    //     $request['limit'] = $request->query('limit');
+    //     $request['page'] = $request->query('page');
+    //     $authUser = $this->getAuthUser();
+
+    //     $data = Course::where('institute_id', $authUser->institute->id)->paginate($request['limit']);
+
+
+    //     $out = [
+    //         "courses" => $data->items(),
+    //         "pagination" => [
+    //         "total" => $data->total(),
+    //         "per_page" => $data->perPage(),
+    //         "current_page" => $data->currentPage(),
+    //         ]
+    //     ];
+
+    //     return response()->json([
+    //         "code" => 200,
+    //         "data" => $out,
+    //         "status" => 'true',
+    //         "message" => "success"
+    //     ]);
+    // }
+
+
 
     public function AllInstituteCourseList(Request $request)
 {
@@ -151,7 +178,33 @@ class CourseCrudController extends Controller
         "message" => "success"
     ]);
 }
+// public function AllInstituteCourseList(Request $request)
+// {
 
+//         $request['limit'] = $request->query('limit');
+//         $request['page'] = $request->query('page');
+
+
+//     $data = Course::paginate( $request['limit']);
+
+
+
+//     $out = [
+//         "courses" => $data->items(),
+//         // "pagination" => [
+//         //     "total" => $data->total(),
+//         //     "per_page" => $data->perPage(),
+//         //     "current_page" => $data->currentPage(),
+//         // ]
+//     ];
+
+//     return response()->json([
+//         "code" => 200,
+//         "data" => $out,
+//         "status" => 'true',
+//         "message" => "success"
+//     ]);
+// }
 
 
 
