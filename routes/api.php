@@ -11,6 +11,7 @@ Route::post('/signup', [AuthController::class, 'signup']);
 Route::group([], base_path('routes/route_api/course_routes.php'));
 Route::group([], base_path('routes/route_api/event_routes.php'));
 Route::group([], base_path('routes/route_api/student_routes.php'));
+Route::group([], base_path('routes/route_api/news_routes.php'));
 
 Route::post('/check', [AuthController::class, 'checkUserAuthOrNot']);
 
