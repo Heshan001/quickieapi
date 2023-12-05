@@ -115,7 +115,31 @@ class EventCrudController extends Controller
         ]);
     }
 
+    public function AllInstituteEventList(Request $request)
+    {
 
+            $request['limit'] = $request->query('limit');
+            $request['page'] = $request->query('page');
+
+
+        $data = Event::paginate( $request['limit']);
+
+        $out = [
+            "events" => $data->items(),
+            // "pagination" => [
+            //     "total" => $data->total(),
+            //     "per_page" => $data->perPage(),
+            //     "current_page" => $data->currentPage(),
+            // ]
+        ];
+
+        return response()->json([
+            "code" => 200,
+            "data" => $out,
+            "status" => 'true',
+            "message" => "success"
+        ]);
+    }
 
 
 }
