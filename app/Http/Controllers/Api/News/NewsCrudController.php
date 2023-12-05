@@ -89,7 +89,7 @@ class NewsCrudController extends Controller
 
     }
 
-    public function NewsList(Request $request)
+    public function newsList(Request $request)
 {
     $request['limit'] = $request->query('limit');
     $request['page'] = $request->query('page');
