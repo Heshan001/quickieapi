@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -93,7 +94,7 @@ class CourseCrudController extends Controller
 
     public function instituteCourseList(Request $request)
     {
-
+        $request['query'] = $request->query('query');
         $request['limit'] = $request->query('limit');
         $request['page'] = $request->query('page');
         $authUser = $this->getAuthUser();
@@ -205,9 +206,6 @@ class CourseCrudController extends Controller
 //         "message" => "success"
 //     ]);
 // }
-
-
-
 
 
 }

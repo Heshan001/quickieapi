@@ -26,8 +26,11 @@ class Institute extends Model
         return $this->hasMany(Course::class);
     }
 
-    public function course()
+    public function events()
     {
         return $this->hasMany(Event::class);
     }
+
+
+
 }

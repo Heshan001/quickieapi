@@ -115,7 +115,7 @@ class NewsCrudController extends Controller
 
 public function AllNewsList(Request $request)
     {
-
+            $request['query'] = $request->query('query');
             $request['limit'] = $request->query('limit');
             $request['page'] = $request->query('page');
 

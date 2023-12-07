@@ -1,53 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Api\Event;
+namespace App\Http\Controllers\Api\Comment;
 
 
 use App\Helpers\AuthUserHelper;
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class EventCrudController extends Controller
+class CommentCrudController extends Controller
 {
     use AuthUserHelper;
 
     public function store(Request $request){
         // validation
         $authUser = $this->getAuthUser();
-        if($authUser->role == 'institute'){
+        if($authUser->role == 'student'){
             $data = [
-                "eventName"=>$request->eventName,
-                "eventDescription"=>$request->eventDescription,
-                "image"=>$request->image,
-                "institute_id"=> $authUser->institute->id
+                "student_id"=> $authUser->student->id,
+                "comment"=>$request->comment,
+
+
             ];
 
-
-
-               // Save the image file
-                $image = $request->file('image');
-            //    // $imageName = $image->getClientOriginalName();
-
-            //  $file = $request->file('file');
-
-                $uploaded = Storage::disk('public')->put('events', $request->file('image'));
-
-
-
-
-                $path = 'storage/' . $uploaded;
-
-            //     // Update the 'image' property in the data array
-                $data['image'] = $path;
-
-
-            $event = new Event($data);
-            $event =$event->save();
+            $comment = new Comment($data);
+            $comment =$comment->save();
 
             return response()->json([
                 "code" => 200,
@@ -66,11 +47,11 @@ class EventCrudController extends Controller
 
     }
 
-    public function delete(Request $request, $event_id){
+    public function delete(Request $request, $comment_id){
 
-        if($event_id){
-           // $event = Event::find($event_id);
-            $status = Event::destroy($event_id);
+        if($comment_id){
+           // $comment = Comment::find($comment_id);
+            $status = Comment::destroy($comment_id);
             if($status){
                 return response()->json([
                     "code" => 200,
@@ -84,22 +65,22 @@ class EventCrudController extends Controller
         return response()->json([
             'code' => 400,
             'status' => false,
-            'message' => 'Error',
+            'message' => 'no comment to delete',
             'error' => "Error",
         ], 400);
 
     }
 
-    public function instituteEventList(Request $request){
+    public function CommentList(Request $request){
         $request['query'] = $request->query('query');
         $request['limit'] = $request->query('limit');
         $request['page'] = $request->query('page');
         $authUser = $this->getAuthUser();
 
-        $data = Event::where('institute_id', $authUser->institute->id)->paginate($request['limit']);
+        $data = Comment::where('student_id', $authUser->student->id)->paginate($request['limit']);
 
         $out = [
-            "events" =>$data->items(),
+            "comments" =>$data->items(),
             "pagination" => [
             "total" => $data->total(),
             "per_page" => $data->perPage(),
@@ -115,22 +96,18 @@ class EventCrudController extends Controller
         ]);
     }
 
-    public function AllInstituteEventList(Request $request)
+    public function AllCommentList(Request $request)
     {
 
             $request['limit'] = $request->query('limit');
             $request['page'] = $request->query('page');
 
 
-        $data = Event::paginate( $request['limit']);
+        $data = Comment::paginate( $request['limit']);
 
         $out = [
-            "events" => $data->items(),
-            // "pagination" => [
-            //     "total" => $data->total(),
-            //     "per_page" => $data->perPage(),
-            //     "current_page" => $data->currentPage(),
-            // ]
+            "comments" => $data->items(),
+
         ];
 
         return response()->json([
