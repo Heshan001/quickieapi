@@ -208,4 +208,71 @@ class CourseCrudController extends Controller
 // }
 
 
+
+
+public function oneCourseDetails(Request $request)
+{
+    $courseId = $request->query('course_id');
+
+    // Validate required parameters
+    if (!$courseId) {
+        return response()->json([
+            'code' => 400,
+            'status' => false,
+            'message' => 'Missing course_id parameter',
+        ], 400);
+    }
+
+    // Find the course using the ID
+    $course = Course::find($courseId);
+
+    // Check if course exists
+    if (!$course) {
+        return response()->json([
+            'code' => 404,
+            'status' => false,
+            'message' => 'Course not found',
+        ], 404);
+    }
+
+    // Filter and prepare the course details
+    $filteredCourse = [
+        'id' => $course->id,
+        'courseName' => $course->courseName,
+        'courseOverview' => $course->courseOverview,
+        'courseContent' => $course->courseContent,
+        'image' => $course->image,
+        // Add additional fields you want to include
+    ];
+
+    // Return the course details
+    return response()->json([
+        'code' => 200,
+        'data' => $filteredCourse,
+        'status' => 'true',
+        'message' => 'Course details',
+    ], 200);
+}
+
+
+public function AllInstituteCourseListWithFilters(Request $request)
+{
+
+    $zScore = $request->zScore;
+    $stream = $request->stream;
+    $result = $request->result;
+
+    $data = Course::select('courseName', 'courseOverview', 'courseContent', 'image','zCore','minimumResult')
+    ->where('zCore','>',$zScore)
+   
+    ->get();
+
+    return response()->json([
+        "code" => 200,
+        "data" => $data,
+        "status" => 'true',
+        "message" => "success"
+    ]);
+}
+
 }
