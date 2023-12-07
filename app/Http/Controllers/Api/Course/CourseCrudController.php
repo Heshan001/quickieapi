@@ -264,7 +264,8 @@ public function AllInstituteCourseListWithFilters(Request $request)
 
     $data = Course::select('courseName', 'courseOverview', 'courseContent', 'image','zCore','minimumResult')
     ->where('zCore','>',$zScore)
-   
+    ->where('subjectStream',$stream)
+    
     ->get();
 
     return response()->json([
