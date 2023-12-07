@@ -11,5 +11,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/course/store', [CourseCrudController::class, 'store']);
     Route::delete('/course/delete/{course_id}', [CourseCrudController::class, 'delete']);
     Route::get('/course/get_list/{limit?}/{page?}/{query?}', [CourseCrudController::class, 'instituteCourseList']);
+    Route::get('/course/get_one/{id?}', [CourseCrudController::class, 'oneCourseDetails']);
+    Route::get('/course/filter/{zScore?}/{stream?}/{result}', [CourseCrudController::class, 'AllInstituteCourseListWithFilters']);
 
 });
