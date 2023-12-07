@@ -22,7 +22,7 @@ class CreateCommentsTable extends Migration
         });
     }
 
-    /**
+    /**relation
      * Reverse the migrations.
      *
      * @return void
