@@ -71,31 +71,31 @@ class CommentCrudController extends Controller
 
     }
 
-    public function CommentList(Request $request){
-        $request['query'] = $request->query('query');
-        $request['limit'] = $request->query('limit');
-        $request['page'] = $request->query('page');
-        $authUser = $this->getAuthUser();
+    // public function CommentList(Request $request){
+    //     $request['query'] = $request->query('query');
+    //     $request['limit'] = $request->query('limit');
+    //     $request['page'] = $request->query('page');
+    //     $authUser = $this->getAuthUser();
 
-        $data = Comment::where('student_id', $authUser->student->id)->paginate($request['limit']);
+    //     $data = Comment::where('student_id', $authUser->student->id)->paginate($request['limit']);
 
-        $out = [
-            "comments" =>$data->items(),
-            "pagination" => [
-            "total" => $data->total(),
-            "per_page" => $data->perPage(),
-            "current_page" => $data->currentPage(),
-            ]
-        ];
+    //     $out = [
+    //         "comments" =>$data->items(),
+    //         "pagination" => [
+    //         "total" => $data->total(),
+    //         "per_page" => $data->perPage(),
+    //         "current_page" => $data->currentPage(),
+    //         ]
+    //     ];
 
-        return response()->json([
-            "code" => 200,
-            "data" => $out,
-            "status" => 'true',
-            "message" => "success"
-        ]);
-    }
-
+    //     return response()->json([
+    //         "code" => 200,
+    //         "data" => $out,
+    //         "status" => 'true',
+    //         "message" => "success"
+    //     ]);
+    // }
+// to get all comments
     public function AllCommentList(Request $request)
     {
 
