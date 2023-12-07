@@ -12,7 +12,7 @@ class Comment extends Model
         'comment', 'student_id',
     ];
 
-
+// relation
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
