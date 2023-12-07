@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/comment/store', [CommentCrudController::class, 'store']);
-    Route::delete('/student/delete/{event_id}', [CommentCrudController::class, 'delete']);
+    
 });
