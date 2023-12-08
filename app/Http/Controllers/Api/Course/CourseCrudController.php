@@ -165,8 +165,7 @@ class CourseCrudController extends Controller
     $request['limit'] = $request->query('limit');
     $request['page'] = $request->query('page');
 
-    $data = Course::select('courseName', 'courseOverview', 'courseContent', 'image')
-        ->paginate($request['limit']);
+    $data = Course::select('courseName', 'courseOverview', 'courseContent', 'image')->paginate($request['limit']);
 
     $out = [
         "courses" => $data->items(),
