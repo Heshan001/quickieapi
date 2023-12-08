@@ -61,5 +61,29 @@ class UserController extends Controller
             'message' => 'User details retrieved successfully',
         ], 200);
     }
+
+    public function delete(Request $request, $user_id){
+
+        if($user_id){
+           // $course = Course::find($course_id);
+            $status = User::destroy($user_id);
+            if($status){
+                return response()->json([
+                    "code" => 200,
+                    "data" => [],
+                    "status" => 'true',
+                    "message" => "success"
+                ]);
+            }
+
+        }
+        return response()->json([
+            'code' => 400,
+            'status' => false,
+            'message' => 'Error',
+            'error' => "Error",
+        ], 400);
+
+    }
 }
 
