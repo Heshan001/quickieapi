@@ -41,7 +41,7 @@ class CourseCrudController extends Controller
                 $file = $request->file('file');
                 // Store the file in the public/uploads directory
                     // $fileName = $file->getClientOriginalName();
-                     $uploaded = Storage::disk('public')->put('courses', $request->file('image'));
+                     $uploaded = Storage::disk('public')->put('/courses', $request->file('image'));
                      $path = 'storage/' . $uploaded;
 
                 // Update the 'image' property in the data array
@@ -165,7 +165,7 @@ class CourseCrudController extends Controller
     $request['limit'] = $request->query('limit');
     $request['page'] = $request->query('page');
 
-    $data = Course::select('courseName', 'courseOverview', 'courseContent', 'image')
+    $data = Course::select('id','courseName', 'courseOverview', 'courseContent', 'image')
         ->paginate($request['limit']);
 
     $out = [

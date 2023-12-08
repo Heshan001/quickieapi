@@ -23,7 +23,7 @@ class NewsCrudController extends Controller
             $data = [
                 "title"=>$request->title,
                 "description"=>$request->description,
-                "image"=>$request->image,
+                "Image"=>$request->image,
             ];
 
 
@@ -34,7 +34,7 @@ class NewsCrudController extends Controller
 
             //  $file = $request->file('file');
 
-                $uploaded = Storage::disk('public')->put('news', $request->file('image'));
+                $uploaded = Storage::disk('public')->put('news', $request->file('Image'));
 
 
 
@@ -42,7 +42,7 @@ class NewsCrudController extends Controller
                 $path = 'storage/' . $uploaded;
 
             //     // Update the 'image' property in the data array
-                $data['image'] = $path;
+                $data['Image'] = $path;
 
 
             $news = new News($data);

@@ -19,6 +19,7 @@ class EventCrudController extends Controller
     public function store(Request $request){
         // validation
         $authUser = $this->getAuthUser();
+        // dd($request->all());
         if($authUser->role == 'institute'){
             $data = [
                 "eventName"=>$request->eventName,
@@ -35,7 +36,7 @@ class EventCrudController extends Controller
 
             //  $file = $request->file('file');
 
-                $uploaded = Storage::disk('public')->put('events', $request->file('image'));
+                $uploaded = Storage::disk('public')->put('/events', $request->file('image'));
 
 
 
