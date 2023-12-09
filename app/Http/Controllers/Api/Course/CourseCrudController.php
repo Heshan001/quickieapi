@@ -28,12 +28,12 @@ class CourseCrudController extends Controller
                 "minimumResult"=>$request->minimumResult,
                 "subjectStream"=>$request->subjectStream,
                 "zCore"=>$request->zCore,
-                "image"=>$request->image,
+                "Image"=>$request->image,
                 "institute_id"=> $authUser->institute->id
             ];
 
                 // Save the image file
-                $image = $request->file('image');
+                $image = $request->file('Image');
              //   $imageName = $image->getClientOriginalName();
                // $path = public_path('uploads/' . $imageName );
                // $image->move($path);
@@ -41,11 +41,11 @@ class CourseCrudController extends Controller
                 $file = $request->file('file');
                 // Store the file in the public/uploads directory
                     // $fileName = $file->getClientOriginalName();
-                     $uploaded = Storage::disk('public')->put('/courses', $request->file('image'));
+                     $uploaded = Storage::disk('public')->put('/courses', $request->file('Image'));
                      $path = 'storage/' . $uploaded;
 
                 // Update the 'image' property in the data array
-                $data['image'] = $path;
+                $data['Image'] = $path;
 
 
             $course = new Course($data);
