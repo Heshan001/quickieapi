@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user/get_allUserList/{limit?}/{page?}/{query?}', [UserController::class, 'getAllUsersWithEmailsAndRoles']);
-    Route::delete('/user/delete/{event_id}', [EventCrudController::class, 'delete']);
+    Route::delete('/user/delete/{event_id}', [userController::class, 'delete']);
 });
