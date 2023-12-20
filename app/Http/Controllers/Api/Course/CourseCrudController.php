@@ -41,7 +41,7 @@ class CourseCrudController extends Controller
                 $file = $request->file('file');
                 // Store the file in the public/uploads directory
                     // $fileName = $file->getClientOriginalName();
-                     $uploaded = Storage::disk('public')->put('/courses', $request->file('Image'));
+                     $uploaded = Storage::disk('public')->put('/events', $request->file('Image'));
                      $path = 'storage/' . $uploaded;
 
                 // Update the 'image' property in the data array
