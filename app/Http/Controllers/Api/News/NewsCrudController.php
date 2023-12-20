@@ -29,12 +29,12 @@ class NewsCrudController extends Controller
 
 
                // Save the image file
-                $image = $request->file('image');
+                $image = $request->file('Image');
             //    // $imageName = $image->getClientOriginalName();
 
             //  $file = $request->file('file');
 
-                $uploaded = Storage::disk('public')->put('news', $request->file('Image'));
+                $uploaded = Storage::disk('public')->put('/news', $request->file('Image'));
 
 
 
